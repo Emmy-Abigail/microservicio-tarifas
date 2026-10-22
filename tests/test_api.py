@@ -192,7 +192,7 @@ def test_dotenv_and_environment_precedence(monkeypatch, tmp_path):
 
 def test_only_assignment_task_is_registered():
     paths = set(app.openapi()["paths"])
-    assert paths == {URL}
+    assert paths == {URL, "/api/v1/optimize-route"}
     operation = app.openapi()["paths"][URL]["post"]
     assert operation["security"] == [{"APIKeyHeader": []}]
     assert operation["responses"]["422"]["content"]["application/json"]["schema"] == {
