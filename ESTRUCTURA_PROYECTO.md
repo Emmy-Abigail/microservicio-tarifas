@@ -8,6 +8,7 @@ microservicio-tarifas/
 |   |-- main.py                    # Crear FastAPI y registrar los endpoints.
 |   |-- api/
 |   |   |-- dependencies.py        # Validar la clave interna X-API-Key.
+|   |   |-- decimal_json.py        # Lectura JSON decimal reutilizable por router.
 |   |   |-- assignments.py         # POST /api/v1/batch-assignments/evaluate.
 |   |   |-- routes.py              # POST /api/v1/optimize-route.
 |   |   `-- health.py              # GET /health.
@@ -33,6 +34,8 @@ microservicio-tarifas/
 |-- .gitignore                     # Archivos que no se suben a Git.
 |-- pyproject.toml                 # Dependencias y configuracion del proyecto.
 |-- Dockerfile                     # Construccion y arranque del contenedor.
+|-- docker-compose.yml             # Arranque de la API en localhost:8000.
+|-- .dockerignore                  # Excluir entorno local y secretos del contexto Docker.
 `-- README.md                      # Instalacion, arranque y pruebas.
 ```
 
