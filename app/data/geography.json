@@ -1,0 +1,370 @@
+{
+  "zonas": [
+    {
+      "id": 1,
+      "codigo": "NORTE",
+      "nombre": "Norte"
+    },
+    {
+      "id": 2,
+      "codigo": "CENTRO",
+      "nombre": "Centro"
+    },
+    {
+      "id": 3,
+      "codigo": "SUR",
+      "nombre": "Sur"
+    },
+    {
+      "id": 4,
+      "codigo": "ESTE",
+      "nombre": "Este"
+    },
+    {
+      "id": 5,
+      "codigo": "OESTE",
+      "nombre": "Oeste"
+    }
+  ],
+  "sedes": [
+    {
+      "id": 1,
+      "nombre": "Sede Norte",
+      "id_zona": 1,
+      "ubigeo_distrito": "150117",
+      "lat": -11.991389,
+      "lng": -77.070833
+    },
+    {
+      "id": 2,
+      "nombre": "Sede Centro",
+      "id_zona": 2,
+      "ubigeo_distrito": "150113",
+      "lat": -12.075556,
+      "lng": -77.043333
+    },
+    {
+      "id": 3,
+      "nombre": "Sede Sur",
+      "id_zona": 3,
+      "ubigeo_distrito": "150140",
+      "lat": -12.145,
+      "lng": -77.005
+    },
+    {
+      "id": 4,
+      "nombre": "Sede Este",
+      "id_zona": 4,
+      "ubigeo_distrito": "150137",
+      "lat": -12.043889,
+      "lng": -76.971389
+    },
+    {
+      "id": 5,
+      "nombre": "Sede Oeste",
+      "id_zona": 5,
+      "ubigeo_distrito": "070102",
+      "lat": -12.0625,
+      "lng": -77.129167
+    }
+  ],
+  "distritos": [
+    {
+      "ubigeo": "150117",
+      "ubigeo_provincia": "1501",
+      "id_zona": 1,
+      "nombre_oficial": "Los Olivos",
+      "nombre_mostrado": "Los Olivos",
+      "lat": -11.991389,
+      "lng": -77.070833
+    },
+    {
+      "ubigeo": "150110",
+      "ubigeo_provincia": "1501",
+      "id_zona": 1,
+      "nombre_oficial": "Comas",
+      "nombre_mostrado": "Comas",
+      "lat": -11.957222,
+      "lng": -77.049444
+    },
+    {
+      "ubigeo": "150112",
+      "ubigeo_provincia": "1501",
+      "id_zona": 1,
+      "nombre_oficial": "Independencia",
+      "nombre_mostrado": "Independencia",
+      "lat": -11.997222,
+      "lng": -77.054722
+    },
+    {
+      "ubigeo": "150135",
+      "ubigeo_provincia": "1501",
+      "id_zona": 1,
+      "nombre_oficial": "San Martín de Porres",
+      "nombre_mostrado": "San Martín de Porres",
+      "lat": -12.03,
+      "lng": -77.0575
+    },
+    {
+      "ubigeo": "150106",
+      "ubigeo_provincia": "1501",
+      "id_zona": 1,
+      "nombre_oficial": "Carabayllo",
+      "nombre_mostrado": "Carabayllo",
+      "lat": -11.890278,
+      "lng": -77.026944
+    },
+    {
+      "ubigeo": "150125",
+      "ubigeo_provincia": "1501",
+      "id_zona": 1,
+      "nombre_oficial": "Puente Piedra",
+      "nombre_mostrado": "Puente Piedra",
+      "lat": -11.866667,
+      "lng": -77.076944
+    },
+    {
+      "ubigeo": "150101",
+      "ubigeo_provincia": "1501",
+      "id_zona": 2,
+      "nombre_oficial": "Lima",
+      "nombre_mostrado": "Cercado de Lima",
+      "lat": -12.045278,
+      "lng": -77.030833
+    },
+    {
+      "ubigeo": "150105",
+      "ubigeo_provincia": "1501",
+      "id_zona": 2,
+      "nombre_oficial": "Breña",
+      "nombre_mostrado": "Breña",
+      "lat": -12.058889,
+      "lng": -77.046111
+    },
+    {
+      "ubigeo": "150115",
+      "ubigeo_provincia": "1501",
+      "id_zona": 2,
+      "nombre_oficial": "La Victoria",
+      "nombre_mostrado": "La Victoria",
+      "lat": -12.065,
+      "lng": -77.030833
+    },
+    {
+      "ubigeo": "150128",
+      "ubigeo_provincia": "1501",
+      "id_zona": 2,
+      "nombre_oficial": "Rímac",
+      "nombre_mostrado": "Rímac",
+      "lat": -12.042222,
+      "lng": -77.026944
+    },
+    {
+      "ubigeo": "150113",
+      "ubigeo_provincia": "1501",
+      "id_zona": 2,
+      "nombre_oficial": "Jesús María",
+      "nombre_mostrado": "Jesús María",
+      "lat": -12.075556,
+      "lng": -77.043333
+    },
+    {
+      "ubigeo": "150116",
+      "ubigeo_provincia": "1501",
+      "id_zona": 2,
+      "nombre_oficial": "Lince",
+      "nombre_mostrado": "Lince",
+      "lat": -12.084444,
+      "lng": -77.030278
+    },
+    {
+      "ubigeo": "150121",
+      "ubigeo_provincia": "1501",
+      "id_zona": 2,
+      "nombre_oficial": "Pueblo Libre",
+      "nombre_mostrado": "Pueblo Libre",
+      "lat": -12.078056,
+      "lng": -77.0625
+    },
+    {
+      "ubigeo": "150136",
+      "ubigeo_provincia": "1501",
+      "id_zona": 2,
+      "nombre_oficial": "San Miguel",
+      "nombre_mostrado": "San Miguel",
+      "lat": -12.092222,
+      "lng": -77.079444
+    },
+    {
+      "ubigeo": "150122",
+      "ubigeo_provincia": "1501",
+      "id_zona": 3,
+      "nombre_oficial": "Miraflores",
+      "nombre_mostrado": "Miraflores",
+      "lat": -12.121667,
+      "lng": -77.029167
+    },
+    {
+      "ubigeo": "150131",
+      "ubigeo_provincia": "1501",
+      "id_zona": 3,
+      "nombre_oficial": "San Isidro",
+      "nombre_mostrado": "San Isidro",
+      "lat": -12.097778,
+      "lng": -77.027222
+    },
+    {
+      "ubigeo": "150104",
+      "ubigeo_provincia": "1501",
+      "id_zona": 3,
+      "nombre_oficial": "Barranco",
+      "nombre_mostrado": "Barranco",
+      "lat": -12.149167,
+      "lng": -77.021667
+    },
+    {
+      "ubigeo": "150140",
+      "ubigeo_provincia": "1501",
+      "id_zona": 3,
+      "nombre_oficial": "Santiago de Surco",
+      "nombre_mostrado": "Santiago de Surco",
+      "lat": -12.145,
+      "lng": -77.005
+    },
+    {
+      "ubigeo": "150130",
+      "ubigeo_provincia": "1501",
+      "id_zona": 3,
+      "nombre_oficial": "San Borja",
+      "nombre_mostrado": "San Borja",
+      "lat": -12.107222,
+      "lng": -76.998889
+    },
+    {
+      "ubigeo": "150108",
+      "ubigeo_provincia": "1501",
+      "id_zona": 3,
+      "nombre_oficial": "Chorrillos",
+      "nombre_mostrado": "Chorrillos",
+      "lat": -12.176944,
+      "lng": -77.016389
+    },
+    {
+      "ubigeo": "150142",
+      "ubigeo_provincia": "1501",
+      "id_zona": 3,
+      "nombre_oficial": "Villa El Salvador",
+      "nombre_mostrado": "Villa El Salvador",
+      "lat": -12.213333,
+      "lng": -76.937222
+    },
+    {
+      "ubigeo": "150119",
+      "ubigeo_provincia": "1501",
+      "id_zona": 3,
+      "nombre_oficial": "Lurín",
+      "nombre_mostrado": "Lurín",
+      "lat": -12.274722,
+      "lng": -76.870278
+    },
+    {
+      "ubigeo": "150132",
+      "ubigeo_provincia": "1501",
+      "id_zona": 4,
+      "nombre_oficial": "San Juan de Lurigancho",
+      "nombre_mostrado": "San Juan de Lurigancho",
+      "lat": -12.029722,
+      "lng": -77.01
+    },
+    {
+      "ubigeo": "150103",
+      "ubigeo_provincia": "1501",
+      "id_zona": 4,
+      "nombre_oficial": "Ate",
+      "nombre_mostrado": "Ate",
+      "lat": -12.026389,
+      "lng": -76.921389
+    },
+    {
+      "ubigeo": "150137",
+      "ubigeo_provincia": "1501",
+      "id_zona": 4,
+      "nombre_oficial": "Santa Anita",
+      "nombre_mostrado": "Santa Anita",
+      "lat": -12.043889,
+      "lng": -76.971389
+    },
+    {
+      "ubigeo": "150111",
+      "ubigeo_provincia": "1501",
+      "id_zona": 4,
+      "nombre_oficial": "El Agustino",
+      "nombre_mostrado": "El Agustino",
+      "lat": -12.048333,
+      "lng": -77.000556
+    },
+    {
+      "ubigeo": "150114",
+      "ubigeo_provincia": "1501",
+      "id_zona": 4,
+      "nombre_oficial": "La Molina",
+      "nombre_mostrado": "La Molina",
+      "lat": -12.078056,
+      "lng": -76.916667
+    },
+    {
+      "ubigeo": "150107",
+      "ubigeo_provincia": "1501",
+      "id_zona": 4,
+      "nombre_oficial": "Chaclacayo",
+      "nombre_mostrado": "Chaclacayo",
+      "lat": -11.975278,
+      "lng": -76.768889
+    },
+    {
+      "ubigeo": "070101",
+      "ubigeo_provincia": "0701",
+      "id_zona": 5,
+      "nombre_oficial": "Callao",
+      "nombre_mostrado": "Callao",
+      "lat": -12.063056,
+      "lng": -77.146944
+    },
+    {
+      "ubigeo": "070102",
+      "ubigeo_provincia": "0701",
+      "id_zona": 5,
+      "nombre_oficial": "Bellavista",
+      "nombre_mostrado": "Bellavista",
+      "lat": -12.0625,
+      "lng": -77.129167
+    },
+    {
+      "ubigeo": "070104",
+      "ubigeo_provincia": "0701",
+      "id_zona": 5,
+      "nombre_oficial": "La Perla",
+      "nombre_mostrado": "La Perla",
+      "lat": -12.065833,
+      "lng": -77.108056
+    },
+    {
+      "ubigeo": "070103",
+      "ubigeo_provincia": "0701",
+      "id_zona": 5,
+      "nombre_oficial": "Carmen de la Legua Reynoso",
+      "nombre_mostrado": "Carmen de la Legua",
+      "lat": -12.039444,
+      "lng": -77.090278
+    },
+    {
+      "ubigeo": "070106",
+      "ubigeo_provincia": "0701",
+      "id_zona": 5,
+      "nombre_oficial": "Ventanilla",
+      "nombre_mostrado": "Ventanilla",
+      "lat": -11.877222,
+      "lng": -77.127778
+    }
+  ]
+}
