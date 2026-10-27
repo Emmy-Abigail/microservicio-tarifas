@@ -40,9 +40,11 @@ def optimize_route(request: RouteRequest) -> RouteResponse:
         district = geography.get_district(stop.ubigeo_destino)
         if district is None:
             raise UnknownDistrictError(f"El distrito {stop.ubigeo_destino} no existe.")
-        pending.append(
-            (position, stop.id_paquete, to_kilometers(district["lat"], district["lng"], reference_lat))
-        )
+        if stop.lat is not None and stop.lng is not None:
+            lat, lng = stop.lat, stop.lng
+        else:
+            lat, lng = district["lat"], district["lng"]
+        pending.append((position, stop.id_paquete, to_kilometers(lat, lng, reference_lat)))
 
     order: list[int] = []
     while pending:
