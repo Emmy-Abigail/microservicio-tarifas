@@ -25,6 +25,9 @@ PHP envia:
 | `paradas` | Entre 1 y 20 paquetes del mismo lote, sin `id_paquete` repetidos. |
 | `id_paquete` | Entero positivo. Python lo conserva en la respuesta. |
 | `ubigeo_destino` | Texto de seis digitos. Python obtiene las coordenadas del distrito del dataset. |
+| `lat`, `lng` | Opcionales. Punto que el operador marco en el mapa; si vienen se usan en lugar del centroide del distrito. Van juntos, como numeros, dentro de Lima y Callao (lat -12.60 a -11.50, lng -77.30 a -76.55). PHP solo los envia cuando el paquete los tiene. |
+
+Ejemplo de parada con punto: `{ "id_paquete": 5021, "ubigeo_destino": "150122", "lat": -12.121234, "lng": -77.030987 }`.
 
 Respuesta 200 (ids de paquetes en el orden de entrega):
 
@@ -42,7 +45,7 @@ Errores (forma `{ "error": "...", "detalle": "..." }`):
 | Codigo | Cuando |
 |---|---|
 | 401 | `X-API-Key` ausente o incorrecta. |
-| 422 | Datos invalidos: sin paradas, mas de 20, ids repetidos, `ubigeo` mal formado, campos desconocidos. |
+| 422 | Datos invalidos: sin paradas, mas de 20, ids repetidos, `ubigeo` mal formado, campos desconocidos, `lat` sin `lng` (o al reves), coordenadas como texto o fuera de Lima y Callao. |
 | 422 | `id_sede` o `ubigeo_destino` que no existen en el dataset. |
 
 La **respuesta propuesta** (`orden` + `algoritmo`) debe confirmarse con el equipo de PHP.

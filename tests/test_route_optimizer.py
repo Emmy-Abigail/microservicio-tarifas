@@ -114,6 +114,40 @@ def test_same_input_gives_same_output():
     assert route(3, stops) == route(3, stops)
 
 
+def route_with_points(id_sede, stops):
+    request = RouteRequest.model_validate({"id_sede": id_sede, "paradas": stops})
+    return optimize_route(request).orden
+
+
+def test_map_point_is_used_instead_of_the_district_centroid():
+    # Mismo distrito: sin punto se respeta el orden de llegada; con un punto junto a
+    # la Sede Sur, ese paquete pasa primero.
+    sede = geography.get_sede(3)
+    stops = [
+        {"id_paquete": 1, "ubigeo_destino": MIRAFLORES},
+        {"id_paquete": 2, "ubigeo_destino": MIRAFLORES},
+    ]
+    assert route_with_points(3, stops) == [1, 2]
+
+    stops[1].update(lat=sede["lat"], lng=sede["lng"])
+    assert route_with_points(3, stops) == [2, 1]
+
+
+def test_stops_without_point_still_use_the_centroid():
+    # Mezclar paradas con y sin punto: la de Surco sin punto sigue en el centroide.
+    stops = [
+        {"id_paquete": 5021, "ubigeo_destino": MIRAFLORES, "lat": -12.1211, "lng": -77.0297},
+        {"id_paquete": 5022, "ubigeo_destino": BARRANCO},
+        {"id_paquete": 5023, "ubigeo_destino": SURCO},
+    ]
+    assert route_with_points(3, stops) == [5023, 5022, 5021]
+
+
+def test_a_point_in_another_district_is_still_validated_by_its_ubigeo():
+    with pytest.raises(UnknownDistrictError):
+        route_with_points(3, [{"id_paquete": 1, "ubigeo_destino": "999999", "lat": -12.1, "lng": -77.0}])
+
+
 def test_unknown_sede():
     with pytest.raises(UnknownSedeError):
         route(99, [(1, MIRAFLORES)])
@@ -134,6 +168,14 @@ def test_endpoint_returns_the_ordered_package_ids(client, route_payload, auth_he
         "orden": [5023, 5022, 5021],
         "algoritmo": "greedy-nearest-neighbor",
     }
+
+
+def test_endpoint_accepts_optional_map_points(client, route_payload, auth_headers):
+    route_payload["paradas"][0].update(lat=-12.121234, lng=-77.030987)
+    route_payload["paradas"][1].update(lat=None, lng=None)
+    response = client.post(URL, json=route_payload, headers=auth_headers)
+    assert response.status_code == 200
+    assert sorted(response.json()["orden"]) == [5021, 5022, 5023]
 
 
 @pytest.mark.parametrize("headers", [{}, {"X-API-Key": "incorrecta"}, {"X-API-Key": ""}])
@@ -165,6 +207,14 @@ def test_endpoint_requires_the_internal_key(client, route_payload, headers):
         lambda p: p.pop("paradas"),
         lambda p: p["paradas"][0].pop("id_paquete"),
         lambda p: p["paradas"][0].pop("ubigeo_destino"),
+        lambda p: p["paradas"][0].update(lat=-12.12),
+        lambda p: p["paradas"][0].update(lng=-77.03),
+        lambda p: p["paradas"][0].update(lat=-12.12, lng=None),
+        lambda p: p["paradas"][0].update(lat="-12.12", lng=-77.03),
+        lambda p: p["paradas"][0].update(lat=-12.12, lng=True),
+        lambda p: p["paradas"][0].update(lat=-16.39, lng=-71.53),
+        lambda p: p["paradas"][0].update(lat=-77.03, lng=-12.12),
+        lambda p: p["paradas"][0].update(lat=-12.12, lng=-77.50),
     ],
 )
 def test_endpoint_rejects_invalid_input(client, route_payload, auth_headers, mutate):
