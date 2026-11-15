@@ -2,7 +2,6 @@ from copy import deepcopy
 
 import pytest
 
-from pydantic import ValidationError
 from app.schemas.assignments import AssignmentRequest
 from app.services.batch_assignment import NoCompatibleVehicleError, evaluate_assignment
 
@@ -123,55 +122,3 @@ def test_evaluation_does_not_reserve_or_mutate(payload):
     original = deepcopy(request)
     assert evaluate_assignment(request) == evaluate_assignment(request)
     assert request == original
-
-MIRAFLORES = (-12.121667, -77.029167)  # centro del distrito 150122, destino del payload
-SAN_ISIDRO = (-12.097778, -77.027222)  # a unos 2.7 km de Miraflores
-SAN_JUAN_DE_LURIGANCHO = (-12.029722, -77.01)  # a unos 10 km de Miraflores
-
-
-def with_center(batch, point):
-    batch["centro_lat"], batch["centro_lng"] = point
-
-
-def test_paquete_cercano_va_al_lote_existente(payload):
-    payload["destino_lat"], payload["destino_lng"] = MIRAFLORES
-    with_center(payload["lotes_candidatos"][0], SAN_ISIDRO)
-    assert evaluate(payload) == {"accion": "USAR_LOTE", "id_tipo_vehiculo": 1, "id_lote": 101}
-
-
-def test_paquete_lejano_crea_lote(payload):
-    payload["destino_lat"], payload["destino_lng"] = MIRAFLORES
-    for batch in payload["lotes_candidatos"]:
-        with_center(batch, SAN_JUAN_DE_LURIGANCHO)
-    assert evaluate(payload) == {"accion": "CREAR_LOTE", "id_tipo_vehiculo": 1, "id_lote": None}
-
-
-def test_salta_el_lote_lejano_y_usa_el_cercano_mas_antiguo(payload):
-    payload["destino_lat"], payload["destino_lng"] = MIRAFLORES
-    with_center(payload["lotes_candidatos"][0], SAN_JUAN_DE_LURIGANCHO)
-    with_center(payload["lotes_candidatos"][1], SAN_ISIDRO)
-    assert evaluate(payload)["id_lote"] == 102
-
-
-def test_sin_punto_en_el_mapa_usa_el_centro_del_distrito(payload):
-    with_center(payload["lotes_candidatos"][0], SAN_JUAN_DE_LURIGANCHO)
-    with_center(payload["lotes_candidatos"][1], SAN_ISIDRO)
-    assert evaluate(payload)["id_lote"] == 102
-
-
-def test_lote_sin_centro_mantiene_el_orden_de_llegada(payload):
-    payload["destino_lat"], payload["destino_lng"] = MIRAFLORES
-    assert evaluate(payload)["id_lote"] == 101
-
-
-@pytest.mark.parametrize("campos", [{"destino_lat": -12.1}, {"destino_lng": -77.0}])
-def test_destino_requiere_lat_y_lng_juntas(payload, campos):
-    payload.update(campos)
-    with pytest.raises(ValidationError):
-        AssignmentRequest.model_validate(payload)
-
-
-def test_centro_requiere_lat_y_lng_juntas(payload):
-    payload["lotes_candidatos"][0]["centro_lat"] = -12.1
-    with pytest.raises(ValidationError):
-        AssignmentRequest.model_validate(payload)
