@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException
 
 from app.api.assignments import router as assignments_router
+from app.api.health import router as health_router
 from app.api.routes import router as routes_router
 from app.schemas.assignments import ErrorResponse, InternalErrorResponse
 
@@ -21,6 +22,7 @@ app = FastAPI(
 )
 app.include_router(assignments_router)
 app.include_router(routes_router)
+app.include_router(health_router)
 
 
 @app.exception_handler(RequestValidationError)
