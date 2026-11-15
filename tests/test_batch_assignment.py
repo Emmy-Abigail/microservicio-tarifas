@@ -122,3 +122,9 @@ def test_evaluation_does_not_reserve_or_mutate(payload):
     original = deepcopy(request)
     assert evaluate_assignment(request) == evaluate_assignment(request)
     assert request == original
+
+
+def test_caso_b_fifo_lote_lleno_pasa_al_siguiente(payload):
+    # Enunciado, pág. 12, Caso B: el lote más antiguo se llena primero; el siguiente paquete va al próximo lote.
+    payload["lotes_candidatos"][0]["cantidad_paquetes"] = 20
+    assert evaluate(payload) == {"accion": "USAR_LOTE", "id_tipo_vehiculo": 1, "id_lote": 102}
