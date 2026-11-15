@@ -3,6 +3,7 @@ from decimal import Decimal
 from typing import Annotated, Any, Literal, Self
 
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, field_validator, model_validator
+from app.schemas.routes import Latitude, Longitude
 
 
 PositiveId = Annotated[int, Field(gt=0, strict=True)]
@@ -36,6 +37,9 @@ class CandidateBatch(InputModel):
     cantidad_paquetes: Annotated[int, Field(ge=0, strict=True)]
     peso_total_kg: NonNegativeDecimal
     created_at: AwareDatetime
+    #Promedio de los puntos de los paqutes del lote, sin el se usa el orden de llegada
+    centro_lat: Latitude | None = None
+    centro_lng: Longitude | None = None
 
     @field_validator("created_at", mode="before")
     @classmethod
@@ -48,6 +52,12 @@ class CandidateBatch(InputModel):
             except ValueError:
                 pass
         raise ValueError("created_at debe ser una fecha ISO 8601 con zona horaria.")
+    
+    @model_validator(mode="after")
+    def validate_center(self) -> Self:
+        if (self.centro_lat is None) != (self.centro_lng is None):
+            raise ValueError("centro_lat y centro_lng deben enviarse juntos.")
+        return self
 
 
 class AssignmentRequest(InputModel):
@@ -56,6 +66,8 @@ class AssignmentRequest(InputModel):
     paquete: Package
     vehiculos: list[Vehicle]
     lotes_candidatos: list[CandidateBatch]
+    destino_lat: Latitude | None = None
+    destino_lng: Longitude | None = None
 
     @model_validator(mode="after")
     def validate_ids_and_references(self) -> Self:
@@ -68,6 +80,8 @@ class AssignmentRequest(InputModel):
         known_vehicles = set(vehicle_ids)
         if any(batch.id_tipo_vehiculo not in known_vehicles for batch in self.lotes_candidatos):
             raise ValueError("Hay lotes que hacen referencia a vehículos inexistentes.")
+        if (self.destino_lat is None) != (self.destino_lng is None):
+            raise ValueError("destino_lat y destino_lng deben enviarse juntos.")
         return self
 
 
